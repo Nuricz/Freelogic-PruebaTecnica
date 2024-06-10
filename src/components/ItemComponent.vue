@@ -3,7 +3,7 @@
 		<v-card-title>{{ item.names[0].name }}</v-card-title>
 		<v-card-subtitle v-for="(name, index) in item.names.slice(1)" :key="index">{{ name.name }}</v-card-subtitle>
 		<v-card-text>
-			<v-chip>#{{ item.id }}</v-chip>
+			<v-chip :color="chipColor">#{{ item.id }}</v-chip>
 			<b>{{ item.date }}</b>
 			<p><b>{{ item.address }}</b></p>
 		</v-card-text>
@@ -22,6 +22,20 @@ export default {
 			required: true
 		}
 	},
+	computed: {
+    chipColor() {
+      switch (this.item.state.name) {
+        case 'BORRADOR':
+          return 'grey';
+        case 'CONFIRMADA':
+          return 'green';
+        case 'VISADA':
+          return 'light-blue';
+        default:
+          return 'default';
+      }
+    }
+  },
 	components: {
 		ItemActions
 	}
